@@ -25,7 +25,7 @@ panel <- read.csv("paneldata.csv")
 
 **Question 1: Which variable indicates the treatment *group*? If your dataset does not have one yet, please create it using the mutate and ifelse function (2 points)**
 
-Answer: The treatment group is when there is an incident of a crime, which is when the variable equals one. Indicating there is pollution.
+Answer: The treatment group is the variable labeled treatment which indicates whether wind is blowing into the neighborhoods from the wheelebrator incinerator or not.
 
 **Question 2: Which variable indicates the treatment *period?* If your dataset does not have one yet, please create it using the mutate and ifelse function (2 points)**
 
@@ -92,13 +92,15 @@ library("lfe")
 Write your model below and run it.
 
 ```{r}
-Model3<- felm(total_violent_crime~treatment + Population + White + Blk_AfAm + Asian + Hisp_Lat + Housing + Occupied + Vacant + Shape__Are + TLML + PRECTOT + SPEED + treatment + total_violent_crime + total_property_crime | Name + month + dayofweek + year, data = panel)
+Model3<- felm(total_violent_crime~treatment + 
+                TLML + PRECTOT + SPEED | 
+                Name + month + dayofweek + year, data = panel)
 summary(Model3)
 ```
 
 **Question 7: Based on the regression in Question 6, what is the** **treatment effect? Is the treatment effect statistically different from 0? (2 points)**
 
-treatment affect: 2.221e-17, it is statistically different as the treatment effect has 3 stars.
+treatment affect: 2.778e-03, it is not statistically different as the treatment effect does not have 3 stars.
 
 **Question 8: Create more binary or categorical variables by multiplying binary variables or combining categorical variables together as you see fit. Explain what real-world factor each new variable represents. (2 points)**
 
